@@ -1,7 +1,7 @@
-Input: [8, 5, 3, 1, 9, 6, 0, 7, 4, 2, 5]
+Input: [14, 5, 55, 61, 56, 60, 49, 95, 86, 46, 78]
 
-Output of Bubble Sort: 				[0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
-Output of Insertion Sort: 		[0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
-Output of Merge Sort: 				[0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
-Output of Quick Sort: 				[0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
-Output of Heap Sort: 					[0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9]
+Output of Bubble Sort: 				[5, 14, 46, 49, 55, 56, 60, 61, 78, 86, 95]
+Output of Insertion Sort: 		[5, 14, 46, 49, 55, 56, 60, 61, 78, 86, 95]
+Output of Merge Sort: 				[5, 14, 46, 49, 55, 56, 60, 61, 78, 86, 95]
+Output of Quick Sort: 				[5, 14, 46, 49, 55, 56, 60, 61, 78, 86, 95]
+Output of Heap Sort: 					[5, 14, 46, 49, 55, 56, 60, 61, 78, 86, 95]
