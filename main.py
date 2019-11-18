@@ -11,20 +11,17 @@ outputDir  = "output/"
 optionCorrectness = "correctness"
 optionAnalysis    = "analysis"
 
-def displayOptions():
-  return '''1. Check for correctness.
-2. Do analysis.
-Enter option >>  '''
-
 def timeIt(funcName, param):
-  start = timeit.default_timer()
-  if funcName.__name__ == "quickSort":
-    result = funcName(param, 0, len(param))
-  else:  
-    result = funcName(param)
-  end = timeit.default_timer()
+  totalTime = 0
+  for i in range(5): 
+    start = timeit.default_timer()
+    if funcName.__name__ == "quickSort":
+      result = funcName(param, 0, len(param))
+    else:  
+      result = funcName(param)
+    totalTime += timeit.default_timer() - start
 
-  return (end - start, result)
+  return ((totalTime/5) * 1000000, result)
 
 def runAlgorithms(option, input):
   outputStream = ""
@@ -37,7 +34,7 @@ def runAlgorithms(option, input):
   sheet.write(0, 0, 'Input Length', style)
   sheet.write(0, 1, len(input))
   sheet.write(2, 0, 'Algorithm Name', style)
-  sheet.write(2, 1, 'Runtime', style)
+  sheet.write(2, 1, 'Runtime (in microsecond)', style)
 
   timeTaken, result = timeIt(algorithms.bubbleSort, input)
   if option == optionCorrectness:
@@ -69,9 +66,23 @@ def runAlgorithms(option, input):
   sheet.write(7, 0, 'Heap Sort')
   sheet.write(7, 1, timeTaken)
 
-  workbook.save(f'{outputDir}{option}.xls')
   if option == optionCorrectness:
     open(f'{outputDir}{option}.txt', "w+").write(outputStream)
+    print(f'Output for correctness of the algorithm can be found in {outputDir}{option}.txt')
+
+  workbook.save(f'{outputDir}{option}.xls')
+  print(f'Runtime (analysis) of the algorithm can be found in {outputDir}{option}.xls') 
+
+def displayOptions():
+  return '''1. Check for correctness.
+2. Do analysis.
+Enter option >>  '''
+
+def displayAnalysisOption():
+  return 'Enter input-data charactersitic [Random (r), Sorted (s)] >> '
+
+def displayDataSetSize():
+  return 'Enter dataset size [100, 1000, 5000, 10000] >> '
 
 if __name__ == '__main__' :
   while True:
@@ -79,10 +90,16 @@ if __name__ == '__main__' :
     if option == 1:
       strList = open(f'{inputDir}correctness.txt', "r").read().split(",")
       data =[int(num) for num in strList]
-      runAlgorithms("correctness", data)
+      runAlgorithms("correctness",  data)
       break
     elif option == 2:
-      strList = open(f'{inputDir}sorted_array.txt', "r").read().split(",")
+      analysisOpt = str.lower(input(displayAnalysisOption()))
+      if analysisOpt != 'r' and analysisOpt != 's' :
+        print("Bad input")
+        break
+      analysisOpt = 'random' if analysisOpt=='r' else 'sorted'
+      datasetSize = int(input(displayDataSetSize()))
+      strList = open(f'{inputDir}{analysisOpt}_{datasetSize}.txt', "r").read().split(",")
       data = [int(num) for num in strList]
       runAlgorithms("analysis", data)
       break
