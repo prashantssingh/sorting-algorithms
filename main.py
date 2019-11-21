@@ -93,6 +93,7 @@ if __name__ == '__main__' :
       runAlgorithms("correctness",  data)
       break
     elif option == 2:
+      # TODO check for typos and make input more flexible to failproof the run
       analysisOpt = str.lower(input(displayAnalysisOption()))
       if analysisOpt != 'r' and analysisOpt != 's' :
         print("Bad input")
